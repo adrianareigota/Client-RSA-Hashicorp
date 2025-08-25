@@ -1,0 +1,11 @@
+import "tfplan/v2" as plan
+
+required = ["owner", "environment", "cost_center"]
+
+main = rule {
+  all plan.resource_changes as rc {
+    rc.change.after is null or
+    (rc.change.after.tags is not null and
+     all required as k { rc.change.after.tags[k] is not null and rc.change.after.tags[k] != "" })
+  }
+}

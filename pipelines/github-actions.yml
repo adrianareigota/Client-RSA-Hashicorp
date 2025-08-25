@@ -1,0 +1,18 @@
+name: terraform-plan
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  plan:
+    permissions:
+      contents: read
+      id-token: write   # OIDC
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - name: Terraform Init
+        run: terraform init
+      - name: Terraform Plan (dev)
+        run: terraform plan -var-file=env/dev.tfvars

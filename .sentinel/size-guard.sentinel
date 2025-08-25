@@ -1,0 +1,10 @@
+import "tfplan/v2" as plan
+
+disallowed_classes = ["memory-xxl", "compute-xxl"]
+
+main = rule {
+  all plan.resource_changes as rc {
+    rc.change.after is null or
+    (rc.change.after.class is null or not (rc.change.after.class in disallowed_classes))
+  }
+}

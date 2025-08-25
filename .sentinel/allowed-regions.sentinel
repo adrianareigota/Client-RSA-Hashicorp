@@ -1,0 +1,10 @@
+import "tfplan/v2" as plan
+
+allowed = ["br-sao", "us-south", "eu-de"]
+
+main = rule {
+  all plan.resource_changes as rc {
+    rc.change.after is null or
+    (rc.change.after.region is null or rc.change.after.region in allowed)
+  }
+}
