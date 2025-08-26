@@ -7,5 +7,3 @@ by adding **Infrastructure as Code**, **Policy as Code**, and **centralized secr
 - **HashiCorp overlay:** Terraform Cloud/Enterprise (modules + workspaces), Sentinel (guardrails), Vault (short‑lived secrets)
 - **Out of scope:** model/embeddings design — handled by AI Engineering
 
-> This is a **presentation-friendly** skeleton: modules are **stubs** (`null_resource`) so `terraform plan` runs without cloud credentials.
-> Swap stubs with real IBM Cloud resources later.
