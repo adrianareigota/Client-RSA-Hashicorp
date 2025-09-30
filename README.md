@@ -1,9 +1,8 @@
-# Client RSA HashiCorp Overlay (Terraform + Sentinel + Vault)
+# Client RSA HashiCorp (Terraform + Sentinel + Vault)
 
-This repository demonstrates how to scale a successful support/search pilot safely across teams and environments
-by adding **Infrastructure as Code**, **Policy as Code**, and **centralized secrets**.
+This repository demonstrates:
 
-- **Platform (example):** ServiceNow → watsonx.orchestrate → IBM Cloud Code Engine → Managed Elasticsearch (IBM Cloud Databases for Elasticsearch)
-- **HashiCorp overlay:** Terraform Cloud/Enterprise (modules + workspaces), Sentinel (guardrails), Vault (short‑lived secrets)
-- **Out of scope:** model/embeddings design — handled by AI Engineering
-
+1) Security and Secrets using HCP and Vault
+2) Compliance and Governance using Hashicorp Sentinel
+3) Migration and Workflow using HCP and Workspaces
+4) AWS to demonstrate
