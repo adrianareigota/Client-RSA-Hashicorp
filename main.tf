@@ -1,31 +1,23 @@
-###############################################
-# Root composition (stubs for interview plan)  #
-###############################################
+# main.tf
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
 
-variable "es_ram_gb"  { type = number, default = 8 }
-variable "es_disk_gb" { type = number, default = 100 }
+  # Set HCP as remote backend
+  cloud {
+    organization = "RSA-Hashicorp"
 
-# Runtime credentials typically come from Vault at deploy-time.
-# Variables here illustrate the contract (do not hardcode secrets).
-variable "es_username" { type = string, default = "vault:es/username" }
-variable "es_password" { type = string, default = "vault:es/password" }
-
-module "es" {
-  source   = "./modules/ibm_elasticsearch"
-  name     = "client-kb"
-  region   = var.region
-  ram_gb   = var.es_ram_gb
-  disk_gb  = var.es_disk_gb
+    workspaces {
+      name = "client-rsa-dev"
+    }
+  }
 }
 
-module "app" {
-  source       = "./modules/code_engine_app"
-  name         = "kb-indexer"
-  region       = var.region
-  es_endpoint  = module.es.endpoint
-  es_username  = var.es_username
-  es_password  = var.es_password
+# AWS Provider Settings (authentication via HCP/Vault)
+provider "aws" {
+  region = "us-east-1" # Standard region
 }
-
-output "es_endpoint" { value = module.es.endpoint }
-output "app_url"     { value = module.app.url }
